@@ -13,6 +13,12 @@
 # | Zenobio, Lucas           | 1217600   |
 # *--------------------------------------*
 
+# Lista de cosas pendientes
+# FALTA VALIDAR CADA UNO DE LOS CAMPOS ---> 50
+# FALTA RELACIONAR LOS IDS DE LAS CATEGORÍAS Y PROVEEDORES CON LAS OTRAS MATRICES ---> 75
+
+# Librerias ---------------------------------------------------------------------------------------------------------
+
 import random
 
 # Funciones ---------------------------------------------------------------------------------------------------------
@@ -21,27 +27,8 @@ def cargar_titulos(t_productos, t_categorias, t_proveedores): # Carga los títul
     t_productos.append('ID Producto','Nombre','Descripción','Cantidad','Precio','ID Categoria', 'ID Proveedor','Anulado')
     t_categorias.append('ID Categoria','Nombre','Descripción')
     t_proveedores.append('ID Proveedor','Nombre','País','Ciudad','Dirección','Código Postal','Teléfono','Email','Tax ID')
-'''
-def cargar_matriz_producto_manual(m_productos):
 
-    flag = True
 
-    while flag == True:
-
-        id_producto = input("Ingrese el ID del producto (o -1 para terminar): ")
-        if id_producto == "-1":
-            flag = False
-        else:
-            nombre = input("Ingrese el nombre del producto: ")
-            descripcion = input("Ingrese la descripción del producto: ")
-            cantidad = input("Ingrese la cantidad del producto: ")
-            precio = input("Ingrese el precio del producto: ")
-            id_categoria = input("Ingrese el ID de la categoría: ")
-            id_proveedor = input("Ingrese el ID del proveedor: ")
-            anulado = input("¿El producto está anulado? (S/N): ")
-
-        m_productos.append([id_producto, nombre, descripcion, cantidad, precio, id_categoria, id_proveedor, anulado])
-'''
 def cargar_matriz_categoria_manual(m_categorias):
 
     flag = True
@@ -49,15 +36,63 @@ def cargar_matriz_categoria_manual(m_categorias):
         nombre = input('Ingrese el nombre de la categoría (o -1 para avanzar a la carga de proveedores): ') # Nombre
         if nombre == '-1' and (m_categorias) == 0:
             nombre = input('Ingrese al menos un registro de categoría para avanzar (o -1 para avanzar a la carga de proveedores): ')
-        elif id_categoria == "-1":
+        elif id_categoria == '-1':
             flag = False
         else:
             descripcion = input('Ingrese la descripción de la categoría: ') # Descripción
             if len(m_categorias) == 0: # ID Categoria
-                id_categoria = 0
+                id_categoria = 1
             else:
                 id_categoria = m_categorias[-1][0] + 1
-        m_categorias.append([id_categoria, nombre, descripcion])
+        if nombre != '-1': # Guardo campos en matriz
+            m_categorias.append([id_categoria, nombre, descripcion])
+
+# FALTA VALIDAR CADA UNO DE LOS CAMPOS
+def cargar_matriz_proveedores_manual(m_proveedores):
+
+    flag = True
+    while flag == True:
+        nombre = input('Ingrese el nombre del proveedor (o -1 para avanzar a la carga de productos): ') # Nombre
+        if nombre == '-1' and (m_proveedores) == 0:
+            nombre = input('Ingrese al menos un registro de proveedor para avanzar (o -1 para avanzar a la carga de productos): ')
+        elif id_proveedor == '-1':
+            flag = False
+        else:
+            pais = input('Ingrese el país del proveedor: ') # País
+            ciudad = input('Ingrese la ciudad del proveedor: ') # Ciudad
+            direccion = input('Ingrese la dirección del proveedor: ') # Dirección
+            codigo_postal = input('Ingrese el código postal del proveedor: ') # Código Postal
+            telefono = input('Ingrese el teléfono del proveedor: ') # Teléfono
+            email = input('Ingrese el email del proveedor: ') # Email
+            tax_id = input('Ingrese el Tax ID del proveedor: ') # Tax ID
+            if len(m_proveedores) == 0: # ID Proveedor
+                id_proveedor = 1
+            else:
+                id_proveedor = m_proveedores[-1][0] + 1
+        if nombre != '-1': # Guardo campos en matriz
+            m_proveedores.append([id_proveedor, nombre, pais, ciudad, direccion, codigo_postal, telefono, email, tax_id])
+
+# FALTA RELACIONAR LOS IDS DE LAS CATEGORÍAS Y PROVEEDORES CON LAS OTRAS MATRICES
+def cargar_matriz_productos_manual(m_productos):
+
+    flag = True
+    while flag == True:
+        nombre = input('Ingrese el nombre del producto (o -1 para terminar la ejecución): ') # Nombre
+        if nombre == '-1':
+            flag = False
+        else:
+            descripcion = input("Ingrese la descripción del producto: ") # Descripción
+            cantidad = input("Ingrese la cantidad del producto: ") # Cantidad
+            precio = input("Ingrese el precio del producto: ") # Precio
+            id_categoria = input("Ingrese el ID de la categoría: ") # ID Categoría
+            id_proveedor = input("Ingrese el ID del proveedor: ") # ID Proveedor
+            anulado = input("¿El producto está anulado? ('X' para Sí): ") # Anulado
+            if len(m_productos) == 0: # ID Producto
+                id_producto = 1
+            else:
+                id_producto = m_productos[-1][0] + 1
+        if nombre != '-1': # Guardo campos en matriz
+            m_productos.append([id_producto, nombre, descripcion, cantidad, precio, id_categoria, id_proveedor, anulado])
 
 
 # Programa Principal -------------------------------------------------------------------------------------------------
@@ -79,7 +114,5 @@ def main():
 
     # Cargar matrices de forma manual
     cargar_matriz_categoria_manual(m_categorias)
-'''
-    cargar_matriz_proveedor_manual(m_proveedores)
-    cargar_matriz_producto_manual(m_productos)
-'''
+    cargar_matriz_proveedores_manual(m_proveedores)
+    cargar_matriz_productos_manual(m_productos)
