@@ -24,9 +24,9 @@ import random
 # Funciones ---------------------------------------------------------------------------------------------------------
 
 def cargar_titulos(t_productos, t_categorias, t_proveedores): # Carga los títulos de las tablas para mostrar en el layout
-    t_productos.append('ID Producto','Nombre','Descripción','Cantidad','Precio','ID Categoria', 'ID Proveedor','Anulado')
-    t_categorias.append('ID Categoria','Nombre','Descripción')
-    t_proveedores.append('ID Proveedor','Nombre','País','Ciudad','Dirección','Código Postal','Teléfono','Email','Tax ID')
+    t_productos.append(['ID Producto','Nombre','Descripción','Cantidad','Precio','ID Categoria', 'ID Proveedor','Anulado'])
+    t_categorias.append(['ID Categoria','Nombre','Descripción'])
+    t_proveedores.append(['ID Proveedor','Nombre','País','Ciudad','Dirección','Código Postal','Teléfono','Email','Tax ID'])
 
 
 def cargar_matriz_categoria_manual(m_categorias):
@@ -36,7 +36,7 @@ def cargar_matriz_categoria_manual(m_categorias):
         nombre = input('Ingrese el nombre de la categoría (o -1 para avanzar a la carga de proveedores): ') # Nombre
         if nombre == '-1' and (m_categorias) == 0:
             nombre = input('Ingrese al menos un registro de categoría para avanzar (o -1 para avanzar a la carga de proveedores): ')
-        elif id_categoria == '-1':
+        elif nombre == '-1':
             flag = False
         else:
             descripcion = input('Ingrese la descripción de la categoría: ') # Descripción
@@ -55,7 +55,7 @@ def cargar_matriz_proveedores_manual(m_proveedores):
         nombre = input('Ingrese el nombre del proveedor (o -1 para avanzar a la carga de productos): ') # Nombre
         if nombre == '-1' and (m_proveedores) == 0:
             nombre = input('Ingrese al menos un registro de proveedor para avanzar (o -1 para avanzar a la carga de productos): ')
-        elif id_proveedor == '-1':
+        elif nombre == '-1':
             flag = False
         else:
             pais = input('Ingrese el país del proveedor: ') # País
@@ -116,3 +116,5 @@ def main():
     cargar_matriz_categoria_manual(m_categorias)
     cargar_matriz_proveedores_manual(m_proveedores)
     cargar_matriz_productos_manual(m_productos)
+
+main()
