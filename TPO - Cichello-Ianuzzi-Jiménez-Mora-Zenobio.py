@@ -94,6 +94,37 @@ def cargar_matriz_productos_manual(m_productos):
         if nombre != '-1': # Guardo campos en matriz
             m_productos.append([id_producto, nombre, descripcion, cantidad, precio, id_categoria, id_proveedor, anulado])
 
+def imprimir_tabla_datos(encabezado, matriz_datos):
+    columnas = len(encabezado)
+    anchos = [len(str(encabezado[i])) for i in range(columnas)]
+    for fila in matriz_datos:
+        for i in range(columnas):
+            anchos[i] = max(anchos[i], len(str(fila[i])))
+
+    # Construir separador
+    separador = '+'
+    for ancho in anchos:
+        separador += '-' * (ancho + 2) + '+'
+
+    # Imprimir encabezado
+    print(separador)
+    fila_encabezado = '| '
+    for i in range(columnas):
+        valor = str(encabezado[i])
+        espacios = anchos[i] - len(valor)
+        fila_encabezado += valor + ' ' * espacios + ' | '
+    print(fila_encabezado)
+    print(separador)
+
+    # Imprimir filas de datos
+    for fila in matriz_datos:
+        fila_formateada = '| '
+        for i in range(columnas):
+            valor = str(fila[i])
+            espacios = anchos[i] - len(valor)
+            fila_formateada += valor + ' ' * espacios + ' | '
+        print(fila_formateada)
+    print(separador)
 
 # Programa Principal -------------------------------------------------------------------------------------------------
 
@@ -116,5 +147,10 @@ def main():
     cargar_matriz_categoria_manual(m_categorias)
     cargar_matriz_proveedores_manual(m_proveedores)
     cargar_matriz_productos_manual(m_productos)
+
+    imprimir_tabla_datos(t_categorias[0], m_categorias)
+    imprimir_tabla_datos(t_proveedores[0], m_proveedores)
+    imprimir_tabla_datos(t_productos[0], m_productos)
+
 
 main()
