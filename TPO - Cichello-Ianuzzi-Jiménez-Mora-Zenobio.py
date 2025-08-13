@@ -14,13 +14,15 @@
 # *--------------------------------------*
 
 # Lista de cosas pendientes
-# FALTA VALIDAR CADA UNO DE LOS CAMPOS ---> 50
-# FALTA RELACIONAR LOS IDS DE LAS CATEGORÍAS Y PROVEEDORES CON LAS OTRAS MATRICES ---> 75
+# FALTA VALIDAR CADA UNO DE LOS CAMPOS ---> 52
+# FALTA RELACIONAR LOS IDS DE LAS CATEGORÍAS Y PROVEEDORES CON LAS OTRAS MATRICES ---> 77
 
+#region Librerias
 # Librerias ---------------------------------------------------------------------------------------------------------
 
 import random
 
+#region Funciones
 # Funciones ---------------------------------------------------------------------------------------------------------
 
 def cargar_titulos(t_productos, t_categorias, t_proveedores): # Carga los títulos de las tablas para mostrar en el layout
@@ -34,8 +36,8 @@ def cargar_matriz_categoria_manual(m_categorias):
     flag = True
     while flag == True:
         nombre = input('Ingrese el nombre de la categoría (o -1 para avanzar a la carga de proveedores): ') # Nombre
-        if nombre == '-1' and (m_categorias) == 0:
-            nombre = input('Ingrese al menos un registro de categoría para avanzar (o -1 para avanzar a la carga de proveedores): ')
+        if nombre == '-1' and len(m_categorias) == 0:
+            nombre = input('Ingrese al menos un registro de categoría para avanzar, ingrese el nombre de la categoría (o -1 para avanzar a la carga de proveedores): ')
         elif nombre == '-1':
             flag = False
         else:
@@ -53,8 +55,8 @@ def cargar_matriz_proveedores_manual(m_proveedores):
     flag = True
     while flag == True:
         nombre = input('Ingrese el nombre del proveedor (o -1 para avanzar a la carga de productos): ') # Nombre
-        if nombre == '-1' and (m_proveedores) == 0:
-            nombre = input('Ingrese al menos un registro de proveedor para avanzar (o -1 para avanzar a la carga de productos): ')
+        if nombre == '-1' and len(m_proveedores) == 0:
+            nombre = input('Ingrese al menos un registro de proveedor para avanzar, ingrese el nombre del proveedor (o -1 para avanzar a la carga de productos): ')
         elif nombre == '-1':
             flag = False
         else:
@@ -86,7 +88,7 @@ def cargar_matriz_productos_manual(m_productos):
             precio = input("Ingrese el precio del producto: ") # Precio
             id_categoria = input("Ingrese el ID de la categoría: ") # ID Categoría
             id_proveedor = input("Ingrese el ID del proveedor: ") # ID Proveedor
-            anulado = input("¿El producto está anulado? ('X' para Sí): ") # Anulado
+            anulado = input("Ingrese si el producto esta anulado ('X' para Sí): ") # Anulado
             if len(m_productos) == 0: # ID Producto
                 id_producto = 1
             else:
@@ -126,6 +128,7 @@ def imprimir_tabla_datos(encabezado, matriz_datos):
         print(fila_formateada)
     print(separador)
 
+#region Programa Principal
 # Programa Principal -------------------------------------------------------------------------------------------------
 
 def main():
@@ -148,8 +151,11 @@ def main():
     cargar_matriz_proveedores_manual(m_proveedores)
     cargar_matriz_productos_manual(m_productos)
 
+    print()
     imprimir_tabla_datos(t_categorias[0], m_categorias)
+    print()
     imprimir_tabla_datos(t_proveedores[0], m_proveedores)
+    print()
     imprimir_tabla_datos(t_productos[0], m_productos)
 
 
